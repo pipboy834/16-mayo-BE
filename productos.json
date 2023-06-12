@@ -1,34 +1,7 @@
 [
   {
-    "id": 270,
-    "name": "mostaza"
-  },
-  {
-    "id": 889,
-    "name": "jamon"
-  },
-  {
-    "id": 460,
-    "name": "hamburguesa"
-  },
-  {
-    "id": 873,
-    "name": "pepinillos"
-  },
-  {
-    "id": 908,
-    "name": "papas"
-  },
-  {
-    "id": 548,
-    "name": "pepinillos encurtidos"
-  },
-  {
-    "id": 289,
-    "name": "mani"
-  },
-  {
-    "id": 903,
-    "name": "proteina"
+    "id": 7,
+    "name": "Nuevo Producto",
+    "price": 50
   }
 ]
