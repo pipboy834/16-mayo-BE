@@ -19,6 +19,7 @@
   "homepage": "https://github.com/pipboy834/16-mayo-BE#readme",
   "dependencies": {
     "express": "^4.18.2",
-    "fs": "^0.0.1-security"
+    "fs": "^0.0.1-security",
+    "socket.io": "^4.7.1"
   }
 }

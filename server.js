@@ -1,22 +1,32 @@
 const express = require('express');
-const productManager = require('./productManager');
+const http = require('http');
+const socketIO = require('socket.io');
 
 const app = express();
+const server = http.createServer(app);
+const io = socketIO(server);
+
+// Configuración del servidor de archivos estáticos
+app.use(express.static(__dirname + '/public'));
+
+// Manejo de conexión de clientes
+io.on('connection', (socket) => {
+  console.log('Nuevo cliente conectado');
+
+  // Manejo de eventos de chat
+  socket.on('chat message', (message) => {
+    console.log('Mensaje recibido:', message);
+    io.emit('chat message', message);
+  });
+
+  // Manejo de desconexión de clientes
+  socket.on('disconnect', () => {
+    console.log('Cliente desconectado');
+  });
+});
+
+// Iniciar el servidor
 const port = 8080;
-
-app.use(express.json());
-
-app.get('/products', async (req, res) => {
-  const products = await productManager.getAll();
-  res.json(products);
-});
-
-app.post('/products', async (req, res) => {
-  const product = req.body;
-  const newProduct = await productManager.addProduct(product);
-  res.json(newProduct);
-});
-
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+server.listen(port, () => {
+  console.log(`Servidor en ejecución en el puerto ${port}`);
 });

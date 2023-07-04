@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chat con WebSockets</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+      }
+
+      #messages {
+        margin-bottom: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Chat con WebSockets</h1>
+
+    <ul id="messages"></ul>
+
+    <form id="chat-form">
+      <input id="message-input" autocomplete="off" />
+      <button>Enviar</button>
+    </form>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      // Conexión al servidor de websockets
+      const socket = io();
+
+      // Manejo del envío de mensajes
+      document.getElementById('chat-form').addEventListener('submit', (event) => {
+        event.preventDefault();
+        const input = document.getElementById('message-input');
+        const message = input.value;
+        input.value = '';
+        socket.emit('chat message', message);
+      });
+
+      // Manejo de recepción de mensajes
+      socket.on('chat message', (message) => {
+        const messages = document.getElementById('messages');
+        const li = document.createElement('li');
+        li.textContent = message;
+        messages.appendChild(li);
+      });
+    </script>
+  </body>
+</html>
